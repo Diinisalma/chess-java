@@ -1,5 +1,7 @@
 package com.github.diinisalma.chess;
 
+import java.util.Arrays;
+
 public class Board {
     public static final String PAWN = "P";
     public static final String ROOK = "R";
@@ -8,9 +10,9 @@ public class Board {
     public static final String QUEEN = "Q";
     public static final String KING = "K";
     public static final String EMPTY = "--";
-    public static final PieceColor PLAYER_1 = PieceColor.W;
-    public static final PieceColor PLAYER_2 = PieceColor.B;
     static String[][] board = new String[8][8];
+    static Player[] players = new Player[] { new Player(PieceColor.W), new Player(PieceColor.B) };
+    public static final String[] cols = new String[] { "A", "B", "C", "D", "E", "F", "G", "H" };
 
     public static void initBoard() {
         for (int i = 0; i < 8; i++) {
@@ -19,32 +21,14 @@ public class Board {
             }
         }
 
-        for (int i = 0; i < 8; i++) {
-            board[1][i] = PLAYER_2 + PAWN;
-            board[6][i] = PLAYER_1 + PAWN;
-            switch (i) {
-                case 0 -> {
-                    setPiece(i, ROOK);
-                }
-                case 1 -> {
-                    setPiece(i, KNIGHT);
-                }
-                case 2 -> {
-                    setPiece(i, BISHOP);
-                }
+        for (var player : players) {
+            for (var piece : player.getPieces()) {
+                Point position = piece.getCurrPosition();
+                board[position.getX()][position.getY()] = piece.getColor() + piece.getPieceConstant();
             }
         }
-        board[0][3] = PLAYER_2 + QUEEN;
-        board[7][3] = PLAYER_1 + QUEEN;
-        board[0][4] = PLAYER_2 + KING;
-        board[7][4] = PLAYER_1 + KING;
-    }
 
-    static void setPiece(int index, String piece) {
-        board[0][7 - index] = PLAYER_2 + piece;
-        board[7][7 - index] = PLAYER_1 + piece;
-        board[0][index] = PLAYER_2 + piece;
-        board[7][index] = PLAYER_1 + piece;
+        displayBoard();
     }
 
     public static void displayBoard() {
@@ -53,8 +37,14 @@ public class Board {
             for (String cell : row) {
                 System.out.print(cell + "\t");
             }
-            System.err.println("\n");
+            System.out.println("\n");
         }
         System.out.println("\n\n");
+        players[0].inputPosition();
+    }
+
+    public static int getColIndex(String colName) {
+        int index = Arrays.binarySearch(cols, colName.toUpperCase());
+        return (index < 0) ? -1 : index;
     }
 }

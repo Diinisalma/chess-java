@@ -7,6 +7,5 @@ package com.github.diinisalma.chess;
 public class App {
     public static void main(String[] args) {
         Board.initBoard();
-        Board.displayBoard();
     }
 }
