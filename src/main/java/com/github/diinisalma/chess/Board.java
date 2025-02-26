@@ -10,9 +10,10 @@ public class Board {
     public static final String QUEEN = "Q";
     public static final String KING = "K";
     public static final String EMPTY = "--";
-    static String[][] board = new String[8][8];
+    public static String[][] board = new String[8][8];
     static Player[] players = new Player[] { new Player(PieceColor.W), new Player(PieceColor.B) };
     public static final String[] cols = new String[] { "A", "B", "C", "D", "E", "F", "G", "H" };
+    static PieceColor currentPlayer = PieceColor.W;
 
     public static void initBoard() {
         for (int i = 0; i < 8; i++) {
@@ -29,6 +30,7 @@ public class Board {
         }
 
         displayBoard();
+        startGame();
     }
 
     public static void displayBoard() {
@@ -40,7 +42,14 @@ public class Board {
             System.out.println("\n");
         }
         System.out.println("\n\n");
-        players[0].inputPosition();
+    }
+
+    private static void startGame() {
+        if (PieceColor.W.equals(currentPlayer)) {
+            players[0].inputPosition();
+        } else {
+            players[1].inputPosition();
+        }
     }
 
     public static int getColIndex(String colName) {

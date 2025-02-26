@@ -91,14 +91,19 @@ public class Player {
         for (Piece piece : pieces) {
             if (piece.getCurrPosition().getX() == currPosition.getX()
                     && piece.getCurrPosition().getY() == currPosition.getY()) {
-                if (piece.move(nextPosition, color)) {
-                    piece.setPrevPosition(currPosition);
-                    piece.setCurrPosition(nextPosition);
+                piece.move(nextPosition, color);
+
+                if (nextPosition.equals(piece.getCurrPosition())) {
+                    Board.currentPlayer = PieceColor.B.equals(color) ? PieceColor.W : PieceColor.B;
+                    Board.initBoard();
+                } else {
+                    this.inputPosition();
                 }
                 break;
             }
         }
-        Board.initBoard();
+        System.out.println("Invalid move");
+        this.inputPosition();
     }
 
 }
