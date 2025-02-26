@@ -117,8 +117,4 @@ public class Rook extends Piece {
         return this;
     }
 
-    private boolean isValidKillingMove(Point newPosition) {
-        return !Board.board[newPosition.getX()][newPosition.getY()].contains(color.toString());
-    }
-
 }
