@@ -70,7 +70,7 @@ public abstract class Piece {
     }
 
     public boolean isValidMove(Point position) {
-        if (position.getX() < 0 || position.getY() < 0) {
+        if (position.getX() < 0 || position.getY() < 0 || position.getX() > 7 || position.getY() > 7) {
             return false;
         }
         String piece = Board.board[position.getX()][position.getY()];
