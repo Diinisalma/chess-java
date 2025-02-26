@@ -27,8 +27,10 @@ public class Board {
 
         for (var player : players) {
             for (var piece : player.getPieces()) {
-                Point position = piece.getCurrPosition();
-                board[position.getX()][position.getY()] = piece.getColor() + piece.getPieceConstant();
+                if (piece.isAlive()) {
+                    Point position = piece.getCurrPosition();
+                    board[position.getX()][position.getY()] = piece.getColor() + piece.getPieceConstant();
+                }
             }
         }
 
