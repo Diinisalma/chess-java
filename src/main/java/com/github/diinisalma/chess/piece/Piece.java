@@ -23,6 +23,8 @@ public abstract class Piece {
 
     public abstract Piece move(Point position, PieceColor color);
 
+    public abstract Piece killingMove(Point nextPosition);
+
     public Point getCurrPosition() {
         return currPosition;
     }

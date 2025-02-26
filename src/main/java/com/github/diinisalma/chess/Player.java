@@ -16,7 +16,7 @@ public class Player {
 
     public Player(PieceColor color) {
         this.color = color;
-        setPieces();
+        initPieces();
     }
 
     public PieceColor getColor() {
@@ -31,7 +31,7 @@ public class Player {
         return pieces;
     }
 
-    private void setPieces() {
+    private void initPieces() {
         if (PieceColor.W.equals(color)) {
             for (int i = 0; i < 8; i++) {
                 pieces[i] = new Pawn(new Point(1, i), PieceColor.W);
@@ -91,7 +91,13 @@ public class Player {
         for (Piece piece : pieces) {
             if (piece.getCurrPosition().getX() == currPosition.getX()
                     && piece.getCurrPosition().getY() == currPosition.getY()) {
-                piece.move(nextPosition, color);
+                String enemyPiece = Board.board[nextPosition.getX()][nextPosition.getY()];
+                if (!Board.EMPTY.equals(enemyPiece) && !enemyPiece.contains(color.toString())) {
+                    piece.killingMove(nextPosition);
+                    Board.updatePiecePlayer(nextPosition);
+                } else {
+                    piece.move(nextPosition, color);
+                }
 
                 if (nextPosition.equals(piece.getCurrPosition())) {
                     Board.currentPlayer = PieceColor.B.equals(color) ? PieceColor.W : PieceColor.B;
@@ -104,6 +110,10 @@ public class Player {
         }
         System.out.println("Invalid move");
         this.inputPosition();
+    }
+
+    public void setPieces(Piece[] pieces) {
+        this.pieces = pieces;
     }
 
 }

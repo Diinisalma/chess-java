@@ -1,6 +1,9 @@
 package com.github.diinisalma.chess;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
+
+import com.github.diinisalma.chess.piece.Piece;
 
 public class Board {
     public static final String PAWN = "P";
@@ -55,5 +58,30 @@ public class Board {
     public static int getColIndex(String colName) {
         int index = Arrays.binarySearch(cols, colName.toUpperCase());
         return (index < 0) ? -1 : index;
+    }
+
+    public static void updatePiecePlayer(Point position) {
+        if (PieceColor.W.equals(currentPlayer)) {
+            Piece[] pieces = players[1].getPieces();
+            int index = findPieceIndex(position, pieces);
+            if (index != -1) {
+                pieces[index].setAlive(false);
+            }
+            players[1].setPieces(pieces);
+        } else {
+            Piece[] pieces = players[0].getPieces();
+            int index = findPieceIndex(position, pieces);
+            if (index != -1) {
+                pieces[index].setAlive(false);
+            }
+            players[0].setPieces(pieces);
+        }
+    }
+
+    private static int findPieceIndex(Point position, Piece[] pieces) {
+        return IntStream.range(0, pieces.length)
+                .filter(i -> pieces[i].getCurrPosition().equals(position))
+                .findFirst()
+                .orElse(-1);
     }
 }

@@ -64,4 +64,24 @@ public class Pawn extends Piece {
         return this;
     }
 
+    @Override
+    public Piece killingMove(Point nextPosition) {
+        List<Point> validKillingMove = new ArrayList<>();
+        if (PieceColor.W.equals(color)) {
+            validKillingMove.add(new Point(currPosition.getX() + 1, currPosition.getY() + 1));
+            validKillingMove.add(new Point(currPosition.getX() + 1, currPosition.getY() - 1));
+        } else {
+            validKillingMove.add(new Point(currPosition.getX() - 1, currPosition.getY() + 1));
+            validKillingMove.add(new Point(currPosition.getX() - 1, currPosition.getY() - 1));
+        }
+
+        if (validKillingMove.contains(nextPosition)) {
+            this.setPrevPosition(currPosition);
+            this.setCurrPosition(nextPosition);
+        } else {
+            System.out.println("Invalid move");
+        }
+        return this;
+    }
+
 }
