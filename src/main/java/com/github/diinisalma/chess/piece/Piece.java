@@ -2,6 +2,7 @@ package com.github.diinisalma.chess.piece;
 
 import java.util.List;
 
+import com.github.diinisalma.chess.Board;
 import com.github.diinisalma.chess.PieceColor;
 import com.github.diinisalma.chess.Point;
 
@@ -20,7 +21,7 @@ public abstract class Piece {
 
     public abstract String getPieceConstant();
 
-    public abstract boolean move(Point position, PieceColor color);
+    public abstract Piece move(Point position, PieceColor color);
 
     public Point getCurrPosition() {
         return currPosition;
@@ -52,6 +53,11 @@ public abstract class Piece {
 
     public void setColor(PieceColor color) {
         this.color = color;
+    }
+
+    public boolean isValidMove(Point position) {
+        String piece = Board.board[position.getX()][position.getY()];
+        return Board.EMPTY.equals(piece);
     }
 
 }

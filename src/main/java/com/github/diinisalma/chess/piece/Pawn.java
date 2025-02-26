@@ -17,16 +17,28 @@ public class Pawn extends Piece {
     List<Point> getAvailableMoves(Point currPosition) {
         List<Point> moves = new ArrayList<>();
         if (PieceColor.W.equals(color)) {
-            moves.add(new Point(currPosition.getX() + 1, currPosition.getY()));
+            Point newPosition = new Point(currPosition.getX() + 1, currPosition.getY());
+            if (isValidMove(newPosition)) {
+                moves.add(newPosition);
+            }
 
             if (null == prevPosition) {
-                moves.add(new Point(currPosition.getX() + 2, currPosition.getY()));
+                newPosition = new Point(currPosition.getX() + 2, currPosition.getY());
+                if (isValidMove(newPosition)) {
+                    moves.add(newPosition);
+                }
             }
         } else {
-            moves.add(new Point(currPosition.getX() - 1, currPosition.getY()));
+            Point newPosition = new Point(currPosition.getX() - 1, currPosition.getY());
+            if (isValidMove(newPosition)) {
+                moves.add(newPosition);
+            }
 
             if (null == prevPosition) {
-                moves.add(new Point(currPosition.getX() - 2, currPosition.getY()));
+                newPosition = new Point(currPosition.getX() - 2, currPosition.getY());
+                if (isValidMove(newPosition)) {
+                    moves.add(newPosition);
+                }
             }
         }
         return moves;
@@ -38,18 +50,18 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean move(Point position, PieceColor color) {
+    public Piece move(Point position, PieceColor color) {
         if (!alive) {
             System.out.println("Piece is dead");
-            return false;
         }
 
         if (getAvailableMoves(currPosition).contains(position)) {
-            return true;
+            this.setPrevPosition(currPosition);
+            this.setCurrPosition(position);
         } else {
             System.out.println("Invalid move");
-            return false;
         }
+        return this;
     }
 
 }
