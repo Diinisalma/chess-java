@@ -48,14 +48,14 @@ public class Player {
             for (int i = 0; i < 8; i++) {
                 pieces[i] = new Pawn(new Point(6, i), PieceColor.B);
             }
-            pieces[8] = new Rook(new Point(7, 0), PieceColor.W);
-            pieces[9] = new Knight(new Point(7, 1), PieceColor.W);
-            pieces[10] = new Bishop(new Point(7, 2), PieceColor.W);
-            pieces[11] = new Queen(new Point(7, 3), PieceColor.W);
-            pieces[12] = new King(new Point(7, 4), PieceColor.W);
-            pieces[13] = new Rook(new Point(7, 5), PieceColor.W);
-            pieces[14] = new Knight(new Point(7, 6), PieceColor.W);
-            pieces[15] = new Bishop(new Point(7, 7), PieceColor.W);
+            pieces[8] = new Rook(new Point(7, 0), PieceColor.B);
+            pieces[9] = new Knight(new Point(7, 1), PieceColor.B);
+            pieces[10] = new Bishop(new Point(7, 2), PieceColor.B);
+            pieces[11] = new Queen(new Point(7, 3), PieceColor.B);
+            pieces[12] = new King(new Point(7, 4), PieceColor.B);
+            pieces[13] = new Rook(new Point(7, 5), PieceColor.B);
+            pieces[14] = new Knight(new Point(7, 6), PieceColor.B);
+            pieces[15] = new Bishop(new Point(7, 7), PieceColor.B);
         }
     }
 
