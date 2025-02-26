@@ -50,21 +50,6 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public Piece move(Point position, PieceColor color) {
-        if (!alive) {
-            System.out.println("Piece is dead");
-        }
-
-        if (getAvailableMoves(currPosition).contains(position)) {
-            this.setPrevPosition(currPosition);
-            this.setCurrPosition(position);
-        } else {
-            System.out.println("Invalid move");
-        }
-        return this;
-    }
-
-    @Override
     public Piece killingMove(Point nextPosition) {
         List<Point> validKillingMove = new ArrayList<>();
         if (PieceColor.W.equals(color)) {

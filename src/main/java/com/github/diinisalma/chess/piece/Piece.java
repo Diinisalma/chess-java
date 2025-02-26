@@ -21,7 +21,19 @@ public abstract class Piece {
 
     public abstract String getPieceConstant();
 
-    public abstract Piece move(Point position, PieceColor color);
+    public Piece move(Point position, PieceColor color) {
+        if (!alive) {
+            System.out.println("Piece is dead");
+        }
+
+        if (getAvailableMoves(currPosition).contains(position)) {
+            this.setPrevPosition(currPosition);
+            this.setCurrPosition(position);
+        } else {
+            System.out.println("Invalid move");
+        }
+        return this;
+    };
 
     public abstract Piece killingMove(Point nextPosition);
 
@@ -58,6 +70,9 @@ public abstract class Piece {
     }
 
     public boolean isValidMove(Point position) {
+        if (position.getX() < 0 || position.getY() < 0) {
+            return false;
+        }
         String piece = Board.board[position.getX()][position.getY()];
         return Board.EMPTY.equals(piece);
     }
