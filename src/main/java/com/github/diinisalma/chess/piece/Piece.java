@@ -77,4 +77,8 @@ public abstract class Piece {
         return Board.EMPTY.equals(piece);
     }
 
+    public boolean isValidKillingMove(Point newPosition) {
+        return !Board.board[newPosition.getX()][newPosition.getY()].contains(color.toString());
+    }
+
 }
