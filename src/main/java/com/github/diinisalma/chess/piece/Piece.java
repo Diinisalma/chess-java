@@ -78,7 +78,8 @@ public abstract class Piece {
     }
 
     public boolean isValidKillingMove(Point newPosition) {
-        return !Board.board[newPosition.getX()][newPosition.getY()].contains(color.toString());
+        return !color.toString()
+                .equals(Character.toString((Board.board[newPosition.getX()][newPosition.getY()]).charAt(0)));
     }
 
 }

@@ -41,9 +41,9 @@ public class Player {
             pieces[10] = new Bishop(new Point(0, 2), PieceColor.W);
             pieces[11] = new Queen(new Point(0, 3), PieceColor.W);
             pieces[12] = new King(new Point(0, 4), PieceColor.W);
-            pieces[13] = new Rook(new Point(0, 5), PieceColor.W);
+            pieces[13] = new Bishop(new Point(0, 5), PieceColor.W);
             pieces[14] = new Knight(new Point(0, 6), PieceColor.W);
-            pieces[15] = new Bishop(new Point(0, 7), PieceColor.W);
+            pieces[15] = new Rook(new Point(0, 7), PieceColor.W);
         } else {
             for (int i = 0; i < 8; i++) {
                 pieces[i] = new Pawn(new Point(6, i), PieceColor.B);
@@ -53,9 +53,9 @@ public class Player {
             pieces[10] = new Bishop(new Point(7, 2), PieceColor.B);
             pieces[11] = new Queen(new Point(7, 3), PieceColor.B);
             pieces[12] = new King(new Point(7, 4), PieceColor.B);
-            pieces[13] = new Rook(new Point(7, 5), PieceColor.B);
+            pieces[13] = new Bishop(new Point(7, 5), PieceColor.B);
             pieces[14] = new Knight(new Point(7, 6), PieceColor.B);
-            pieces[15] = new Bishop(new Point(7, 7), PieceColor.B);
+            pieces[15] = new Rook(new Point(7, 7), PieceColor.B);
         }
     }
 
@@ -94,7 +94,9 @@ public class Player {
             if (piece.getCurrPosition().getX() == currPosition.getX()
                     && piece.getCurrPosition().getY() == currPosition.getY()) {
                 String enemyPiece = Board.board[nextPosition.getX()][nextPosition.getY()];
-                if (!Board.EMPTY.equals(enemyPiece) && !enemyPiece.contains(color.toString())) {
+                String enemyColor = Character.toString(enemyPiece.charAt(0));
+                if (!Board.EMPTY.equals(enemyPiece)
+                        && !color.toString().equals(enemyColor)) {
                     piece.killingMove(nextPosition);
                     Board.updatePiecePlayer(nextPosition);
                 } else {
