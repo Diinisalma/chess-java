@@ -63,6 +63,8 @@ public class Player {
         try (Scanner scanner = new Scanner(System.in)) {
             // Enter current position and new position
             String currPosition = scanner.next();
+            if (currPosition.toLowerCase().equals("exit"))
+                return;
             String newPosition = scanner.next();
             int currX = getX(currPosition);
             int currY = getY(currPosition);
